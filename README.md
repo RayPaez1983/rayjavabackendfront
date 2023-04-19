@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+This a frontend project that use a mysql java backend
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
