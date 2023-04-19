@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Users = (props) => {
+  const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   const [createUser, setCreateUser] = useState({
     name: '',
@@ -17,6 +18,13 @@ const Users = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post('http://localhost:8080/user', createUser);
+    setTimeout(() => {
+      setCreateUser({
+        name: '',
+        username: '',
+        email: '',
+      });
+    }, 1000);
   };
   const deleteUser = async (id) => {
     await axios.delete(`http://localhost:8080/user/${id}`);
@@ -42,7 +50,7 @@ const Users = (props) => {
         </thead>
         {users.map((user, idx) => {
           return (
-            <tbody key={idx}>
+            <tbody key={idx} onClick={() => navigate(`/singleuser/${user.id}`)}>
               <tr>
                 <td>{user.name}</td>
                 <td>{user.username}</td>
